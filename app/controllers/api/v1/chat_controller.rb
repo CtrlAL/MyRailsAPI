@@ -16,7 +16,7 @@ module Api
         #render json:@user
           render json: @chat , status: :created #json: @user ,
         else
-          render json: @chat.errors, status: :unprocessable_entity
+           render json: @chat.errors, status: :unprocessable_entity
         end
       end
     end
