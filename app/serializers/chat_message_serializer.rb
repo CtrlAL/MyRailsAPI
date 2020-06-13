@@ -3,9 +3,9 @@ class ChatMessageSerializer < ActiveModel::Serializer
   belongs_to :user
   belongs_to :chat
 class UserSerializer < ActiveModel::Serializer
-    attributes :name,:latetude,:longitude,:uuid,:token
+    attributes :name,:uuid
 end
 class ChatSerializer < ActiveModel::Serializer
-  attributes :chatkey,:title ,:users
+  attributes :chatkey,:title
 end
 end
