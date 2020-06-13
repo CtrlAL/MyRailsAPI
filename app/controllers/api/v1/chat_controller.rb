@@ -7,20 +7,30 @@ module Api
       render json: @chat
     end
     def create
-      @chat = Chat.new(chat_params)
-      if @chat.save
-        #render json:@user
-        render json: @chat , status: :created #json: @user ,
+      @chat = Chat.find_by(chat_fparams)
+      if @chat
+      render json: "Already exist"
       else
-        render json: @chat.errors, status: :unprocessable_entity
+      @chat = Chat.new(chat_params)
+        if @chat.save
+        #render json:@user
+          render json: @chat , status: :created #json: @user ,
+        else
+          render json: @chat.errors, status: :unprocessable_entity
+        end
       end
     end
     def update
       @chat = Chat.find_by(chat_fparams)
+      @sameuser = @chat.users.find_by(uuid_params)
+      if @sameuser
+      render json: "Already exist"
+      else
       @user = User.find_by(uuid_params)
       @chat.users << [@user]
       @chat.save
       render json: @chat
+      end
     end
     def destroy
       @chat = Chat.find_by(chat_fparams)

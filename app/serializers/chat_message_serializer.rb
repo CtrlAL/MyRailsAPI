@@ -1,5 +1,5 @@
 class ChatMessageSerializer < ActiveModel::Serializer
-  attributes :text
+  attributes :text , :createtd_at
   belongs_to :user
   belongs_to :chat
 class UserSerializer < ActiveModel::Serializer
