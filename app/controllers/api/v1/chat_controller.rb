@@ -24,7 +24,7 @@ module Api
       @chat = Chat.find_by(chat_fparams)
       @sameuser = @chat.users.find_by(uuid_params)
       if @sameuser
-      render json: "Already exist"
+      render json: {chat: "Already exist"}
       else
       @user = User.find_by(uuid_params)
       @chat.users << [@user]
