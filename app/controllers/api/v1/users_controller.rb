@@ -27,6 +27,9 @@ module Api
         if params[:radius]
         @user.radius = params[:radius]
         end
+        if params[:name]
+        @user.name = params[:name]
+        end
         if @user.save
         render json: @user
         end
