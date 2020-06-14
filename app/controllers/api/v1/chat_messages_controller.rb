@@ -10,6 +10,7 @@ module Api
     end
 
     def create
+    if params[:chatkey]
     @chat = @user.chats.find_by(chat_for_message_params)
     @chat_message =  @chat.chat_messages.new(chat_message_params)
     @chat_message.user = @user
@@ -18,6 +19,7 @@ module Api
         else
         render json: @chat_message.errors ,status:  :unprocessable_entity
       end
+    end
     end
     private
     def chat_message_params
