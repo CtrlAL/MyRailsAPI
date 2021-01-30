@@ -87,11 +87,14 @@ GEM
     method_source (1.0.0)
     mimemagic (0.3.4)
     mini_mime (1.0.2)
-    mini_portile2 (2.4.0)
+    mini_portile2 (2.5.0)
     minitest (5.14.0)
     nio4r (2.5.2)
-    nokogiri (1.10.9-x64-mingw32)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.11.1)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
+    nokogiri (1.11.1-x64-mingw32)
+      racc (~> 1.4)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -99,6 +102,7 @@ GEM
       pry (>= 0.10.4)
     puma (4.3.3)
       nio4r (~> 2.0)
+    racc (1.5.2)
     rack (2.2.2)
     rack-attack (6.3.0)
       rack (>= 1.0, < 3)
@@ -153,6 +157,7 @@ GEM
     zeitwerk (2.3.0)
 
 PLATFORMS
+  ruby
   x64-mingw32
 
 DEPENDENCIES
