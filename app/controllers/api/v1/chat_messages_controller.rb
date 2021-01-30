@@ -21,6 +21,26 @@ module Api
       end
     end
     end
+
+
+    def destroy
+      @chat = Chat.find_by(chat_for_message_params)
+      @chat_message = @chat.chat_message.find_by(id_id)
+      if @chat_message
+        @chat_message.destroy
+        render json: @chat_message
+      else
+        render json: {chat_message: "not found"}, status: :not_found
+      end
+    end
+
+    def update
+      @chat = Chat.find_by(chat_for_message_params)
+      @chat_message = @chat.chat_message.find_by(id_id)
+      @chat_message.text = params[:text]
+      render json: @chat_message
+    end
+
     private
     def chat_message_params
       params.permit(:text)
@@ -30,6 +50,9 @@ module Api
     end
     def uuid_params
       params.permit(:uuid)
+    end
+    def id_id
+      params.permit(:id)
     end
     def authenticate
       authenticate_or_request_with_http_token do |token, options|

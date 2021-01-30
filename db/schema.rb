@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_152723) do
+ActiveRecord::Schema.define(version: 2021_01_29_172024) do
 
   create_table "chat_messages", force: :cascade do |t|
     t.string "text"
@@ -32,6 +32,20 @@ ActiveRecord::Schema.define(version: 2020_06_12_152723) do
     t.index ["user_id"], name: "index_chats_users_on_user_id"
   end
 
+  create_table "pchats", force: :cascade do |t|
+    t.string "adress_user"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "chatid"
+  end
+
+  create_table "pchats_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "pchat_id"
+    t.index ["pchat_id"], name: "index_pchats_users_on_pchat_id"
+    t.index ["user_id"], name: "index_pchats_users_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
@@ -47,9 +61,41 @@ ActiveRecord::Schema.define(version: 2020_06_12_152723) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "private_chats", force: :cascade do |t|
+    t.string "address_user"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "privmessages", force: :cascade do |t|
+    t.text "mestext"
+    t.integer "user_id", null: false
+    t.integer "pchat_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pchat_id"], name: "index_privmessages_on_pchat_id"
+    t.index ["user_id"], name: "index_privmessages_on_user_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.text "report_text"
+    t.string "rep_user_id"
+    t.integer "post_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_reports_on_post_id"
+    t.index ["rep_user_id"], name: "index_reports_on_rep_user_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
 # Could not dump table "users" because of following StandardError
 #   Unknown type 'Fixnum' for column 'radius'
 
   add_foreign_key "chat_messages", "chats"
   add_foreign_key "chat_messages", "users"
+  add_foreign_key "privmessages", "pchats"
+  add_foreign_key "privmessages", "users"
+  add_foreign_key "reports", "posts"
+  add_foreign_key "reports", "users"
 end
